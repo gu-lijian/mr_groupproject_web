@@ -1,0 +1,26 @@
+<!-- howdy/templates/acra.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Assessment in Progress</title>
+    </head>
+    <body>
+        <h1>Assessment in Progress</h1>
+    <p>
+    Your assessment is in Progress
+    </p>
+        {% if process_id %}
+            <ul>
+                <li>Your Process ID: {{ process_id }}</li>
+            </ul>
+            <form action="/status/">
+                <input id="process_id" type="text" name="process_id" value="{{ process_id }}"><br>
+                <input type="submit" value="Check Assessment Status">
+            </form>
+        {% else %}
+            <p>Submission failed, please submit again</p>
+        {% endif %}
+    <a href="/">Go back home</a>
+    </body>
+</html>

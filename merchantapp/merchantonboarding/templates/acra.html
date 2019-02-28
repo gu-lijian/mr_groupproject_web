@@ -1,0 +1,29 @@
+<!-- howdy/templates/acra.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ACRA Search</title>
+    </head>
+    <body>
+        <h1>Welcome to the ACRA search page</h1>
+    <p>
+    You can search if a company has registered with ACRA
+    </p>
+        {% if records_list %}
+            <ul>
+            {% for record in records_list %}
+                <li>UEN: {{ record.uen }}</li>
+                <li>Business Activity: {{ record.primary_user_described_activity }}</li>
+                <li>Building Name: {{ record.building_name }}</li>
+                <li>Postal Code: {{ record.postal_code }}</li>
+                <li>Registration Date: {{ record.registration_incorporation_date }}</li>
+            {% endfor %}
+            </ul>
+            <a href="/jbpm/">Assess Merchant</a>
+        {% else %}
+            <p>Assessment result: Rejected.</p>
+        {% endif %}
+    <a href="/">Go back home</a>
+    </body>
+</html>

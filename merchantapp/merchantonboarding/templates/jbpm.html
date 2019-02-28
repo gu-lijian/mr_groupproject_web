@@ -1,0 +1,81 @@
+<!-- templates/jbpm.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Merchant Assessment</title>
+    </head>
+    <body>
+        <h1>Merchant On Boarding Assessment</h1>
+        <form action="/assess/">
+            <table style="width:100%">
+                <tr>
+                    <th>
+                        <label for="uen">UEN: </label>
+                    </th>
+                    <th>
+                        <input id="uen" type="text" name="uen"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="ceo_ic">CEO IC: </label>
+                    </th>
+                    <th>
+                        <input id="ceo_ic" type="text" name="ceo_ic"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="net_income">Net Income: </label>
+                    </th>
+                    <th>
+                        <input id="net_income" type="text" name="net_income"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="no_employee">Number of Employee: </label>
+                    </th>
+                    <th>
+                         <input id="no_employee" type="text" name="no_employee"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                         <label for="found_date">Founded Date: </label>
+                    </th>
+                    <th>
+                        <input id="found_date" type="text" name="found_date"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                       <label for="found_loc">Founded Location: </label>
+                    </th>
+                    <th>
+                        <input id="found_loc" type="text" name="found_loc"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="total_deposit">Total Deposit: </label>
+                    </th>
+                    <th>
+                        <input id="total_deposit" type="text" name="total_deposit"><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                       <label for="vat_id">VAT ID: </label>
+                    </th>
+                    <th>
+                         <input id="vat_id" type="text" name="vat_id"><br>
+                    </th>
+                </tr>
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    <a href="/">Go back home</a>
+    </body>
+</html>
