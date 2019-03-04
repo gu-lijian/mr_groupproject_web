@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Merchant Onboarding Assessment</title>
+    <title>Certainty Factor Page</title>
 
     <!-- Font Icon -->
     {% load static %}
@@ -22,19 +22,29 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form action="/acra/" id="signup-form" class="signup-form">
-                        <h2 class="form-title">Merchant Onboarding Assessment</h2>
+                    <form action="/status/" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Certainty Factors</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name='uen' id="uen" placeholder="please enter UEN here"/>
+                            <ul>
+                                <li class="list-group-item">Operational Certainty Factor: {{ cfoperational }}</li>
+                                <li class="list-group-item">Credibility Certainty Factor: {{ cfcredibility }}</li>
+                                <li class="list-group-item">Financial Certainty Factor: {{ cffinancial }}</li>
+                                <li class="list-group-item">Combined Factor: {{ cffinal }}</li>
+                            </ul>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Search"/>
+                            <input id="process_id" type="hidden" name="process_id" value="{{ process_id }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Check Status"/>
                         </div>
                     </form>
+                    <p class="loginhere">
+                        <a href="/" class="loginhere-link"> Return Home </a>
+                    </p>
                 </div>
             </div>
         </section>
-
     </div>
 
     <!-- JS -->

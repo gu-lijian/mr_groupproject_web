@@ -1,81 +1,67 @@
-<!-- templates/jbpm.html -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Merchant Assessment</title>
-    </head>
-    <body>
-        <h1>Merchant On Boarding Assessment</h1>
-        <form action="/assess/">
-            <table style="width:100%">
-                <tr>
-                    <th>
-                        <label for="uen">UEN: </label>
-                    </th>
-                    <th>
-                        <input id="uen" type="text" name="uen"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="ceo_ic">CEO IC: </label>
-                    </th>
-                    <th>
-                        <input id="ceo_ic" type="text" name="ceo_ic"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="net_income">Net Income: </label>
-                    </th>
-                    <th>
-                        <input id="net_income" type="text" name="net_income"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="no_employee">Number of Employee: </label>
-                    </th>
-                    <th>
-                         <input id="no_employee" type="text" name="no_employee"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                         <label for="found_date">Founded Date: </label>
-                    </th>
-                    <th>
-                        <input id="found_date" type="text" name="found_date"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                       <label for="found_loc">Founded Location: </label>
-                    </th>
-                    <th>
-                        <input id="found_loc" type="text" name="found_loc"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="total_deposit">Total Deposit: </label>
-                    </th>
-                    <th>
-                        <input id="total_deposit" type="text" name="total_deposit"><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                       <label for="vat_id">VAT ID: </label>
-                    </th>
-                    <th>
-                         <input id="vat_id" type="text" name="vat_id"><br>
-                    </th>
-                </tr>
-            </table>
-            <input type="submit" value="Submit">
-        </form>
-    <a href="/">Go back home</a>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Merchant Assessment Page</title>
+
+    <!-- Font Icon -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form action="/assess/" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Merchant Details</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="uen" id="uen" placeholder="{{ uen }}"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="ceo_ic" id="ceo_ic" placeholder="Please enter CEO NRIC here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="net_income" id="net_income" placeholder="Please enter net income here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="no_employee" id="no_employee" placeholder="Please enter employee size here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="found_year" id="found_year" placeholder="Please enter founding year here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="found_loc" id="found_loc" placeholder="Please enter founding country here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="total_deposit" id="total_deposit" placeholder="Please enter total deposit value here"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="vat_id" id="vat_id" placeholder="Please enter VAT ID here"/>
+                        </div>
+                       
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Submit"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        <a href="/" class="loginhere-link">Return Home</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
 </html>

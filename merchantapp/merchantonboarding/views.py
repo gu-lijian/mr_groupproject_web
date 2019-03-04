@@ -37,13 +37,15 @@ class AcraPageView(TemplateView):
 
 class JbpmPageView(TemplateView):
     def get(self, request, **kwargs):
+        uen = request.GET.get('uen')
         template = loader.get_template('jbpm.html')
-        context = {}
+        context = {
+            'uen': uen,
+        }
         return HttpResponse(template.render(context, request))
 
 class AssessPageView(TemplateView):
     def get(self, request, **kwargs):
-        #jbpm_base_url = "http://localhost:8080/kie-server/services/rest/server/containers/Merchant_Onboarding_1.0.0/processes/Merchant_Onboarding.MerchantOnboardingProcess/instances"
         jbpm_base_url = "http://localhost:8080/kie-server/services/rest/server/containers/MerchantOnboarding_1.0.0/processes/MerchantOnboarding.onboardingprocess/instances"
         accept_header = "application/json"
         content_header = "application/json"
@@ -55,14 +57,14 @@ class AssessPageView(TemplateView):
         uen = request.GET.get('uen')
         net_income = request.GET.get('net_income')
         no_employee = request.GET.get('no_employee')
-        found_date = request.GET.get('found_date')
+        found_year = request.GET.get('found_year')
         found_loc = request.GET.get('found_loc')
         total_deposit = request.GET.get('total_deposit')
         vat_id = request.GET.get('vat_id')
         payload = {
                     "merchant": {"com.myspace.merchantonboarding.Merchant": {
                             "ceoIC": ceo_ic,
-                            "dateOfEstablishment": found_date,
+                            "yearOfEstablishment": found_year,
                             "netIncome": net_income,
                             "numberOfEmployees": no_employee,
                             "registeredLocation": found_loc,
@@ -89,6 +91,54 @@ class AssessPageView(TemplateView):
         except Exception as err:
             print(f'Other error occurred: {err}')  # Python 3.6
 
+class CheckCFsPageView(TemplateView):
+    def get(self, request, **kwargs):
+        try:
+            process_id = request.GET.get('process_id')
+            query_url = "http://localhost:8080/kie-server/services/rest/server/containers/MerchantOnboarding_1.0.0/processes/instances/" + process_id + "/workitems"
+            accept_header = "application/json"
+            content_header = "application/json"
+            headers = {
+                'Accept': accept_header,
+                'Content-Type': content_header
+            }
+            response = requests.get(url=query_url,
+                                    auth=('wbadmin', 'wbadmin'),
+                                    headers=headers
+                                    )
+            json_response = response.json()
+            cf_operational = json_response['work-item-instance'][0]['work-item-params']['merchant']['com.myspace.merchantonboarding.Merchant']['cfoperational']
+            cf_credibility = json_response['work-item-instance'][0]['work-item-params']['merchant']['com.myspace.merchantonboarding.Merchant']['cfcredibility']
+            cf_financial = json_response['work-item-instance'][0]['work-item-params']['merchant']['com.myspace.merchantonboarding.Merchant']['cffinancial']
+            if cf_credibility:
+                cf_credibility = 0.0
+            if cf_credibility == -1.0 or cf_operational == -1.0:
+                final_cf = -1.0
+            elif cf_operational + cf_financial == 0.0:
+                final_cf = 0.0
+            elif cf_financial < 0.0 and cf_operational < 0.0:
+                final_cf = cf_financial + cf_operational + (cf_financial*cf_operational)
+            elif cf_financial >= 0.0 and cf_operational >= 0.0:
+                final_cf = cf_financial + cf_operational - (cf_financial * cf_operational)
+            elif cf_financial*cf_operational < 0.0 and abs(cf_financial) > abs(cf_operational):
+                final_cf = (cf_financial + cf_operational)/(1-abs(cf_operational))
+            elif cf_financial * cf_operational < 0.0 and abs(cf_financial) < abs(cf_operational):
+                final_cf = (cf_financial + cf_operational) / (1 - abs(cf_financial))
+            template = loader.get_template('certaintyfactor.html')
+            context = {
+                'cfoperational': cf_operational,
+                'cfcredibility': cf_credibility,
+                'cffinancial': cf_financial,
+                'cffinal': final_cf,
+                'process_id': process_id
+            }
+            return HttpResponse(template.render(context, request))
+
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')  # Python 3.6
+        except Exception as err:
+            print(f'Other error occurred: {err}')  # Python 3.6
+
 class CheckAssessPageView(TemplateView):
     def get(self, request, **kwargs):
         try:
@@ -109,6 +159,7 @@ class CheckAssessPageView(TemplateView):
             template = loader.get_template('result.html')
             context = {
                 'result': result,
+                'process_id': process_id
             }
             return HttpResponse(template.render(context, request))
         except HTTPError as http_err:
