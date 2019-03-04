@@ -29,10 +29,14 @@ class AcraPageView(TemplateView):
         else:
             json_response = response.json()
             records = json_response['result']['records']
-            template = loader.get_template('acra.html')
-            context = {
-                'records_list': records,
-            }
+            if query:
+                template = loader.get_template('acra.html')
+                context = {
+                    'records_list': records,
+                }
+            else:
+                template = loader.get_template('index.html')
+                context = {}
             return HttpResponse(template.render(context, request))
 
 class JbpmPageView(TemplateView):
