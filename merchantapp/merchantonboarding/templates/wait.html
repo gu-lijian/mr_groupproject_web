@@ -1,57 +1,58 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Wait Page</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial Assessment Page</title>
 
-        <!-- Font Icon -->
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Icon -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Main css -->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    </head>
-    <body>
-       <div class="main">
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
 
-            <section class="signup">
-                <!-- <img src="images/signup-bg.jpg" alt=""> -->
-                <div class="container">
-                    <div class="signup-content">
-                        <form action="/cfs/" id="signup-form" class="signup-form">
-                            <h2 class="form-title">Assessment in Progress</h2>
-                            {% if process_id %}
-                                <div class="form-group">
-                                    <ul>
-                                        <li class="list-group-item">Your Process ID: {{ process_id }}</li>
-                                    </ul>
-                                </div>
-                                <div class="form-group">
-                                    <input id="process_id" type="hidden" name="process_id" value="{{ process_id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" name="submit" id="submit" class="form-submit" value="Check Certainty Factors"/>
-                                </div>
-                            {% else %}
-                               <p>Submission failed, please submit again</p>
-                            {% endif %}
-                        </form>
-                        <p class="loginhere">
-                             <a href="/" class="loginhere-link"> Return Home </a>
-                        </p>
-                    </div>
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form action="/status/" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Initial Assessment Result</h2>
+                        <div class="form-group">
+                            <ul>
+                                <li class="list-group-item">Your Process ID: {{ process_id }}</li>
+                                <li class="list-group-item">Operational Certainty Factor: {{ cfoperational }}</li>
+                                <li class="list-group-item">Credibility Certainty Factor: {{ cfcredibility }}</li>
+                                <li class="list-group-item">Financial Certainty Factor: {{ cffinancial }}</li>
+                                <li class="list-group-item">Combined Factor: {{ cffinal }}</li>
+                            </ul>
+                        </div>
+                        <div class="form-group">
+                            <input id="process_id" type="hidden" name="process_id" value="{{ process_id }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Check Status"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        <a href="/" class="loginhere-link"> Return Home </a>
+                    </p>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+    </div>
 
-        <!-- JS -->
-        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </body>
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -23,6 +23,5 @@ urlpatterns = [
     path('acra/', views.AcraPageView.as_view()),
     path('jbpm/', views.JbpmPageView.as_view()),
     path('assess/', views.AssessPageView.as_view()),
-    path('cfs/', views.CheckCFsPageView.as_view()),
     path('status/', views.CheckAssessPageView.as_view()),
 ]
