@@ -4,7 +4,6 @@ from requests.exceptions import HTTPError
 from django.http import HttpResponse
 from django.template import loader
 import requests
-import datetime
 from json import dumps, loads
 
 # Create your views here.
@@ -29,14 +28,10 @@ class AcraPageView(TemplateView):
         else:
             json_response = response.json()
             records = json_response['result']['records']
-            if query:
-                template = loader.get_template('acra.html')
-                context = {
-                    'records_list': records,
-                }
-            else:
-                template = loader.get_template('index.html')
-                context = {}
+            template = loader.get_template('acra.html')
+            context = {
+                'records_list': records,
+            }
             return HttpResponse(template.render(context, request))
 
 class JbpmPageView(TemplateView):
@@ -50,13 +45,6 @@ class JbpmPageView(TemplateView):
 
 class AssessPageView(TemplateView):
     def get(self, request, **kwargs):
-        jbpm_base_url = "http://localhost:8080/kie-server/services/rest/server/containers/MerchantOnboarding_1.0.0/processes/MerchantOnboarding.onboardingprocess/instances"
-        accept_header = "application/json"
-        content_header = "application/json"
-        headers = {
-                    'Accept': accept_header,
-                    'Content-Type': content_header
-                   }
         ceo_ic = request.GET.get('ceo_ic')
         uen = request.GET.get('uen')
         net_income = request.GET.get('net_income')
@@ -65,6 +53,13 @@ class AssessPageView(TemplateView):
         found_loc = request.GET.get('found_loc')
         total_deposit = request.GET.get('total_deposit')
         vat_id = request.GET.get('vat_id')
+        jbpm_base_url = "http://localhost:8080/kie-server/services/rest/server/containers/MerchantOnboarding_1.0.0/processes/MerchantOnboarding.onboardingprocess/instances"
+        accept_header = "application/json"
+        content_header = "application/json"
+        headers = {
+                    'Accept': accept_header,
+                    'Content-Type': content_header
+                   }
         payload = {
                     "merchant": {"com.myspace.merchantonboarding.Merchant": {
                             "ceoIC": ceo_ic,
