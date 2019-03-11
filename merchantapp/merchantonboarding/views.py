@@ -14,7 +14,7 @@ class HomePageView(TemplateView):
 class AcraPageView(TemplateView):
     def get(self, request, **kwargs):
         acra_base_url = "https://data.gov.sg/api/action/datastore_search"
-        resource_id = "e8732ea3-adca-4ca0-9fef-2b90c7a24f06"
+        resource_id = "bdb377b8-096f-4f86-9c4f-85bad80ef93c"
         query = request.GET.get('uen')
         try:
             response = requests.get(url=acra_base_url,

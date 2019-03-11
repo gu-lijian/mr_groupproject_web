@@ -30,15 +30,12 @@
                                     {% for record in records_list %}
                                     <li class="list-group-item">UEN: {{ record.uen }}</li>
                                     <input type="hidden" class="form-input" name="uen" id="uen" value="{{ record.uen }}"/>
-                                    <li class="list-group-item">Business Activity: {{ record.primary_user_described_activity }}</li>
-                                    <li class="list-group-item">Street Name: {{ record.street_name }}</li>
-                                    <li class="list-group-item">Building Name: {{ record.building_name }}</li>
-                                    <li class="list-group-item">Block: {{ record.block }}</li>
-                                    <li class="list-group-item">Unit No: {{ record.unit_no }}</li>
-                                    <li class="list-group-item">Postal Code: {{ record.postal_code }}</li>
-                                    <li class="list-group-item">Registration Date: {{ record.registration_incorporation_date }}</li>
                                     <li class="list-group-item">Entity Name: {{ record.entity_name }}</li>
-                                    <li class="list-group-item">Entity Status: {{ record.entity_status_description }}</li>
+                                    <li class="list-group-item">Registered Street Name: {{ record.reg_street_name }}</li>
+                                    <li class="list-group-item">Registered Postal Code: {{ record.reg_postal_code }}</li>
+                                    <li class="list-group-item">Issued Agency ID: {{ record.issuance_agency_id }}</li>
+                                    <li class="list-group-item">UEN Issued Date: {{ record.uen_issue_date }}</li>
+                                    <li class="list-group-item">UEN Status: {{ record.uen_status }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>
